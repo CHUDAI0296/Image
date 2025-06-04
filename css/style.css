@@ -650,17 +650,19 @@ body {
 }
 .apple-navbar-links {
     display: flex;
-    gap: 2.2rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    white-space: nowrap;
 }
 .apple-navbar-link {
-    font-size: 1.08rem;
-    color: #1d1d1f;
-    text-decoration: none;
+    font-size: 1.1rem;
     font-weight: 500;
-    padding: 0.5rem 1.2rem;
-    border-radius: 16px;
-    transition: background 0.2s, color 0.2s;
-    position: relative;
+    color: #222;
+    text-decoration: none;
+    padding: 0 10px;
+    transition: color 0.2s;
+    white-space: nowrap;
 }
 .apple-navbar-link:hover {
     background: linear-gradient(90deg, #e0fbe6 0%, #e6f0ff 100%);
