@@ -71,25 +71,25 @@
     <!-- 苹果风格导航栏 -->
     <nav class="apple-navbar">
         <div class="apple-navbar-container">
-            <a href="../index.html" class="apple-navbar-logo">图像魔方</a>
+            <a href="../index.html" class="apple-navbar-logo">Image Toolbox</a>
             <div class="apple-navbar-links">
-                <a href="../index.html" class="apple-navbar-link">首页</a>
-                <a href="ai-generate.html" class="apple-navbar-link">AI文生图</a>
-                <a href="ai-avatar.html" class="apple-navbar-link">动漫头像</a>
-                <a href="img2comic.html" class="apple-navbar-link">图片转漫画</a>
-                <a href="video2livephoto.html" class="apple-navbar-link">视频转实况</a>
-                <a href="dji-watermark.html" class="apple-navbar-link active">大疆水印</a>
-                <a href="remove-watermark.html" class="apple-navbar-link">去水印</a>
-                <a href="ai-logo.html" class="apple-navbar-link">AI生成Logo</a>
-                <a href="compress.html" class="apple-navbar-link">图片压缩</a>
-                <a href="convert.html" class="apple-navbar-link">格式转换</a>
+                <a href="../index.html" class="apple-navbar-link">Home</a>
+                <a href="ai-generate.html" class="apple-navbar-link">AI Image Gen</a>
+                <a href="ai-avatar.html" class="apple-navbar-link">AI Avatar</a>
+                <a href="img2comic.html" class="apple-navbar-link">Image to Comic</a>
+                <a href="video2livephoto.html" class="apple-navbar-link">Video to Live Photo</a>
+                <a href="dji-watermark.html" class="apple-navbar-link active">DJI Watermark</a>
+                <a href="remove-watermark.html" class="apple-navbar-link">Watermark Remover</a>
+                <a href="ai-logo.html" class="apple-navbar-link">AI Logo</a>
+                <a href="compress.html" class="apple-navbar-link">Compress</a>
+                <a href="convert.html" class="apple-navbar-link">Convert</a>
             </div>
         </div>
     </nav>
     <div class="container">
         <header class="header">
-            <h1>大疆水印</h1>
-            <p class="subtitle">上传照片，自定义添加大疆/相机风格水印</p>
+            <h1>DJI Watermark</h1>
+            <p class="subtitle">Upload a photo and add DJI/camera-style watermark</p>
         </header>
         <!-- 上传区 -->
         <div class="dji-upload-area dji-watermark-area" id="djiUploadArea">
@@ -104,7 +104,7 @@
             </div>
             <!-- 水印内容表单 -->
             <form class="watermark-form" id="watermarkForm">
-                <label for="modelSelect">机型：</label>
+                <label for="modelSelect">Model:</label>
                 <div style="display:flex;gap:0.5rem;align-items:center;">
                     <select id="modelSelect" style="flex:1;padding:0.7rem 1rem;border-radius:12px;">
                         <option value="DJI Mavic 3">🛩️ DJI Mavic 3</option>
@@ -112,21 +112,21 @@
                         <option value="DJI Mini 3 Pro">🛩️ DJI Mini 3 Pro</option>
                         <option value="Canon EOS R5">📷 Canon EOS R5</option>
                         <option value="Sony A7M4">📷 Sony A7M4</option>
-                        <option value="自定义">✏️ 自定义</option>
+                        <option value="Custom">✏️ Custom</option>
                     </select>
-                    <input type="text" id="modelInput" placeholder="自定义机型" style="display:none;flex:1;" />
+                    <input type="text" id="modelInput" placeholder="Custom model" style="display:none;flex:1;" />
                 </div>
-                <label for="timeSelect">拍摄时间：</label>
+                <label for="timeSelect">Time:</label>
                 <div style="display:flex;gap:0.5rem;align-items:center;">
                     <select id="timeSelect" style="flex:1;padding:0.7rem 1rem;border-radius:12px;">
-                        <option value="now">当前时间</option>
-                        <option value="custom">自定义</option>
+                        <option value="now">Current time</option>
+                        <option value="custom">Custom</option>
                     </select>
-                    <input type="text" id="timeInput" placeholder="如 2024-06-01 14:30" style="display:none;flex:1;" />
+                    <input type="text" id="timeInput" placeholder="e.g. 2024-06-01 14:30" style="display:none;flex:1;" />
                 </div>
-                <label for="gpsInput">经纬度：</label>
+                <label for="gpsInput">GPS:</label>
                 <div style="display:flex;gap:0.5rem;align-items:center;">
-                    <input type="text" id="gpsInput" placeholder="如 39.9042°N, 116.4074°E" required style="flex:1;">
+                    <input type="text" id="gpsInput" placeholder="e.g. 39.9042°N, 116.4074°E" required style="flex:1;">
                     <button type="button" id="locateBtn" class="dji-watermark-btn" style="padding:0.7rem 1.2rem;font-size:1.1rem;min-width:48px;min-height:48px;display:flex;align-items:center;justify-content:center;">📍</button>
                 </div>
             </form>
