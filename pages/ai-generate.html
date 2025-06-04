@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI文生图工具</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 苹果风格导航栏 -->
+    <nav class="apple-navbar">
+        <div class="apple-navbar-container">
+            <a href="../index.html" class="apple-navbar-logo">图像魔方</a>
+            <div class="apple-navbar-links">
+                <a href="../index.html" class="apple-navbar-link">首页</a>
+                <a href="ai-generate.html" class="apple-navbar-link active">AI文生图</a>
+                <a href="compress.html" class="apple-navbar-link">图片压缩</a>
+                <a href="convert.html" class="apple-navbar-link">格式转换</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <header class="header">
+            <h1>AI文生图工具</h1>
+            <p class="subtitle">用一句话，生成你想要的图片</p>
+            <div class="features">
+                <div class="feature-item">
+                    <span class="feature-icon">🤖</span>
+                    <span class="feature-text">AI智能生成，创意无限</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🖼️</span>
+                    <span class="feature-text">多种风格，高清输出</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-text">快速生成，实时预览</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⬇️</span>
+                    <span class="feature-text">一键下载，方便保存</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- AI文生图功能区 -->
+        <div class="ai-generate-area">
+            <div class="ai-form-wrapper">
+                <form id="aiForm" class="ai-form" autocomplete="off">
+                    <label for="prompt" class="ai-label">请输入你想要生成的图片描述：</label>
+                    <input type="text" id="prompt" class="ai-input" placeholder="例如：蓝天白云下的草地" required>
+                    <button type="submit" class="ai-generate-btn">生成图片</button>
+                </form>
+            </div>
+
+            <div class="ai-preview" id="aiPreview" style="display:none;">
+                <h3>生成结果</h3>
+                <div class="ai-image-container">
+                    <img id="aiImage" alt="AI生成的图片">
+                </div>
+                <button id="downloadAI" class="download-btn">下载图片</button>
+            </div>
+            <div id="aiLoading" class="ai-loading" style="display:none;">图片生成中，请稍候...</div>
+            <div id="aiError" class="ai-error" style="display:none;"></div>
+        </div>
+
+        <div class="tips-section">
+            <h3>使用小贴士</h3>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <h4>💡 灵感无限</h4>
+                    <p>输入任意描述，AI帮你实现创意</p>
+                </div>
+                <div class="tip-item">
+                    <h4>🎨 多种风格</h4>
+                    <p>支持多种艺术风格和主题</p>
+                </div>
+                <div class="tip-item">
+                    <h4>⚡ 极速生成</h4>
+                    <p>几秒钟即可获得高清图片</p>
+                </div>
+                <div class="tip-item">
+                    <h4>⬇️ 一键下载</h4>
+                    <p>生成图片可直接保存到本地</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/ai-generate.js"></script>
+</body>
+</html> 

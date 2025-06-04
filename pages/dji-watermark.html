@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大疆水印</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+    /* 大疆水印主色调深蓝色 */
+    .dji-watermark-area {
+        border: 2.5px dashed #2233AA;
+        box-shadow: 0 6px 24px rgba(34,51,170,0.10);
+        border-radius: 24px;
+        background: white;
+        max-width: 700px;
+        margin: 0 auto 2rem auto;
+        padding: 2.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .dji-watermark-btn {
+        background: linear-gradient(90deg, #2233AA, #007AFF);
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 1.5rem;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(34,51,170,0.10);
+    }
+    .dji-watermark-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(34,51,170,0.18);
+    }
+    .preview-img {
+        max-width: 100%;
+        max-height: 320px;
+        border-radius: 16px;
+        margin: 1.5rem 0;
+        box-shadow: 0 2px 8px rgba(34,51,170,0.08);
+    }
+    .watermark-form {
+        width: 100%;
+        max-width: 420px;
+        margin: 1.5rem 0 0.5rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .watermark-form label {
+        font-size: 1rem;
+        color: #1d1d1f;
+        margin-bottom: 0.2rem;
+    }
+    .watermark-form input {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.7rem 1rem;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 12px;
+        background: #f5f5f7;
+        outline: none;
+    }
+    </style>
+</head>
+<body>
+    <!-- 苹果风格导航栏 -->
+    <nav class="apple-navbar">
+        <div class="apple-navbar-container">
+            <a href="../index.html" class="apple-navbar-logo">图像魔方</a>
+            <div class="apple-navbar-links">
+                <a href="../index.html" class="apple-navbar-link">首页</a>
+                <a href="ai-generate.html" class="apple-navbar-link">AI文生图</a>
+                <a href="ai-avatar.html" class="apple-navbar-link">动漫头像</a>
+                <a href="img2comic.html" class="apple-navbar-link">图片转漫画</a>
+                <a href="video2livephoto.html" class="apple-navbar-link">视频转实况</a>
+                <a href="dji-watermark.html" class="apple-navbar-link active">大疆水印</a>
+                <a href="remove-watermark.html" class="apple-navbar-link">去水印</a>
+                <a href="ai-logo.html" class="apple-navbar-link">AI生成Logo</a>
+                <a href="compress.html" class="apple-navbar-link">图片压缩</a>
+                <a href="convert.html" class="apple-navbar-link">格式转换</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <header class="header">
+            <h1>大疆水印</h1>
+            <p class="subtitle">上传照片，自定义添加大疆/相机风格水印</p>
+        </header>
+        <!-- 上传区 -->
+        <div class="dji-upload-area dji-watermark-area" id="djiUploadArea">
+            <div class="upload-content">
+                <div id="uploadBtn" class="dji-upload-btn" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;">
+                    <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#2233AA"/><path d="M24 14v20M24 14l-7 7M24 14l7 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span style="font-size:1.1rem;color:#2233AA;">点击上传照片</span>
+                    <span style="font-size:0.95rem;color:#86868b;">支持JPG、PNG等格式，或拖拽到此处</span>
+                </div>
+                <input type="file" id="djiInput" accept="image/*" class="file-input" style="display:none;">
+                <img id="djiPreviewImg" class="preview-img" style="display:none;" alt="图片预览">
+            </div>
+            <!-- 水印内容表单 -->
+            <form class="watermark-form" id="watermarkForm">
+                <label for="modelSelect">机型：</label>
+                <div style="display:flex;gap:0.5rem;align-items:center;">
+                    <select id="modelSelect" style="flex:1;padding:0.7rem 1rem;border-radius:12px;">
+                        <option value="DJI Mavic 3">🛩️ DJI Mavic 3</option>
+                        <option value="DJI Air 2S">🛩️ DJI Air 2S</option>
+                        <option value="DJI Mini 3 Pro">🛩️ DJI Mini 3 Pro</option>
+                        <option value="Canon EOS R5">📷 Canon EOS R5</option>
+                        <option value="Sony A7M4">📷 Sony A7M4</option>
+                        <option value="自定义">✏️ 自定义</option>
+                    </select>
+                    <input type="text" id="modelInput" placeholder="自定义机型" style="display:none;flex:1;" />
+                </div>
+                <label for="timeSelect">拍摄时间：</label>
+                <div style="display:flex;gap:0.5rem;align-items:center;">
+                    <select id="timeSelect" style="flex:1;padding:0.7rem 1rem;border-radius:12px;">
+                        <option value="now">当前时间</option>
+                        <option value="custom">自定义</option>
+                    </select>
+                    <input type="text" id="timeInput" placeholder="如 2024-06-01 14:30" style="display:none;flex:1;" />
+                </div>
+                <label for="gpsInput">经纬度：</label>
+                <div style="display:flex;gap:0.5rem;align-items:center;">
+                    <input type="text" id="gpsInput" placeholder="如 39.9042°N, 116.4074°E" required style="flex:1;">
+                    <button type="button" id="locateBtn" class="dji-watermark-btn" style="padding:0.7rem 1.2rem;font-size:1.1rem;min-width:48px;min-height:48px;display:flex;align-items:center;justify-content:center;">📍</button>
+                </div>
+            </form>
+            <button class="dji-watermark-btn" id="addWatermarkBtn">添加水印</button>
+        </div>
+        <!-- 结果区 -->
+        <div class="ai-generate-area" id="djiResultArea" style="display:none;">
+            <h3>添加水印结果</h3>
+            <div class="ai-image-container">
+                <img id="djiResultImg" alt="带水印图片">
+            </div>
+            <button class="download-btn" id="djiDownloadBtn">下载图片</button>
+        </div>
+    </div>
+    <!-- 详细中文注释和JS逻辑可后续补充 -->
+    <script src="../js/dji-watermark.js"></script>
+</body>
+</html> 
