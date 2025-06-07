@@ -1,0 +1,10 @@
+name = "image-toolbox-api"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+# 这里可以添加环境变量
+# REPLICATE_API_KEY = "your-api-key"  # 建议在 Cloudflare 控制台设置
+
+[triggers]
+crons = [] 

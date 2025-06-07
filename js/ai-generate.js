@@ -65,11 +65,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const loading = document.getElementById('loading');
     const error = document.getElementById('error');
     const downloadBtn = document.getElementById('downloadImage');
+    const generatedImage = document.getElementById('generatedImage');
 
+    // API configuration
+    // 修改为你的 Cloudflare Worker 代理 API 地址，保护API密钥安全
+    const API_URL = 'https://wild-night-aa18.1504478674.workers.dev'; // ← 这里填写你的 Worker 地址
+    const REPLICATE_MODEL = 'stability-ai/sdxl:39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b';
+
+    // Handle form submission
     generateForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // 显示加载状态
+        // Show loading state
         loading.style.display = 'block';
         error.style.display = 'none';
         preview.style.display = 'none';
@@ -84,17 +91,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         try {
-            const response = await fetch('https://ai-text-to-image-generator-flux-free-api.p.rapidapi.com/aaaaaaaaaaaaaaaaaiimagegenerator/quick.php', {
+            const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'x-rapidapi-host': 'ai-text-to-image-generator-flux-free-api.p.rapidapi.com',
-                    'x-rapidapi-key': 'fdd740979dmshca77e72afa83addp1cc120jsn8286043d96f5'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     prompt: prompt,
-                    style_id: 2,
-                    size: "1-1"
+                    model: REPLICATE_MODEL,
+                    negative_prompt: "blurry, low quality, distorted, deformed",
+                    num_inference_steps: 50,
+                    guidance_scale: 7.5
                 })
             });
 
@@ -108,15 +115,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error(data.error);
             }
 
-            // 显示生成的图片
-            const imageUrl = data.image_url;
-            const img = document.getElementById('generatedImage');
-            img.src = imageUrl;
+            // Display generated image
+            generatedImage.src = data.output;
             
-            // 设置下载按钮
+            // Set up download button
             downloadBtn.onclick = function() {
                 const link = document.createElement('a');
-                link.href = imageUrl;
+                link.href = data.output;
                 link.download = 'generated-image.png';
                 document.body.appendChild(link);
                 link.click();
