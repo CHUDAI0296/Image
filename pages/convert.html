@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片格式转换工具</title>
+    <title>Image Format Converter</title>
+    <meta name="description" content="Convert images between different formats">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -28,34 +29,34 @@
     <div class="container">
         <header class="header">
             <h1>Image Format Converter</h1>
-            <p class="subtitle">Convert image formats with one click, simple and efficient</p>
-            <div class="features" style="margin-bottom: 2.5rem;">
-                <div class="feature-item"><span class="feature-icon">🖼️</span><span class="feature-text">Supports multiple image formats</span></div>
-                <div class="feature-item"><span class="feature-icon">⚡</span><span class="feature-text">Fast conversion, real-time preview</span></div>
-                <div class="feature-item"><span class="feature-icon">📥</span><span class="feature-text">One-click download, HD output</span></div>
-                <div class="feature-item"><span class="feature-icon">🔒</span><span class="feature-text">Local processing, safe and private</span></div>
+            <p class="subtitle">Convert images between different formats easily</p>
+            <div class="features">
+                <div class="feature-item"><span class="feature-icon">🔄</span><span class="feature-text">Multiple formats</span></div>
+                <div class="feature-item"><span class="feature-icon">🎯</span><span class="feature-text">Quality preserved</span></div>
+                <div class="feature-item"><span class="feature-icon">⚡</span><span class="feature-text">Fast conversion</span></div>
+                <div class="feature-item"><span class="feature-icon">⬇️</span><span class="feature-text">One-click download</span></div>
             </div>
         </header>
 
         <!-- 上传区域：图片格式转换（绿色虚线） -->
         <div class="upload-area convert-upload-area" id="convertUploadArea">
             <div class="upload-content">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='none' stroke='%2334C759' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E" alt="上传图标" class="upload-icon">
-                <p>点击或拖拽图片到这里</p>
-                <p class="upload-hint">支持 PNG、JPG、WEBP 等格式</p>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='none' stroke='%2334C759' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E" alt="Upload icon" class="upload-icon">
+                <p>Click or drag image here</p>
+                <p class="upload-hint">Supports PNG, JPG, WEBP formats</p>
                 <input type="file" id="convertInput" accept="image/*" class="file-input" multiple>
             </div>
         </div>
         <!-- 原图列表区 -->
         <div class="original-list-preview" id="originalListPreview" style="display:none;">
-            <h3>已上传图片列表</h3>
+            <h3>Uploaded Images</h3>
             <table class="file-list-table">
                 <thead>
                     <tr>
-                        <th>选择</th>
-                        <th>文件名</th>
-                        <th>大小</th>
-                        <th>格式</th>
+                        <th>Select</th>
+                        <th>Filename</th>
+                        <th>Size</th>
+                        <th>Format</th>
                     </tr>
                 </thead>
                 <tbody id="fileListTbody"></tbody>
@@ -65,44 +66,49 @@
         <div class="convert-form-wrapper">
             <form id="convertForm" class="convert-form" autocomplete="off">
                 <div class="convert-select-group">
-                    <label for="formatSelect">目标格式：</label>
+                    <label for="formatSelect">Target Format:</label>
                     <select id="formatSelect" class="convert-select">
-                        <option value="jpeg">JPG</option>
+                        <option value="jpeg">JPEG</option>
                         <option value="png">PNG</option>
-                        <option value="webp">WEBP</option>
+                        <option value="webp">WebP</option>
+                        <option value="gif">GIF</option>
                     </select>
                 </div>
-                <button type="submit" class="convert-btn">开始转换</button>
+                <button type="submit" class="convert-btn">Convert Image</button>
             </form>
         </div>
 
         <div class="convert-preview" id="convertPreview" style="display:none;">
-            <h3>转换结果</h3>
+            <h3>Result</h3>
             <div class="convert-image-container" id="convertImageContainer"></div>
-            <button id="downloadAll" class="download-btn" style="display:none;">全部下载</button>
+            <div class="convert-info">
+                <p>Original format: <span id="originalFormat">-</span></p>
+                <p>New format: <span id="newFormat">-</span></p>
+            </div>
+            <button id="downloadAll" class="download-btn" style="display:none;">Download All</button>
         </div>
-        <div id="convertLoading" class="ai-loading" style="display:none;">图片转换中，请稍候...</div>
-        <div id="convertError" class="ai-error" style="display:none;"></div>
+        <div id="convertLoading" class="convert-loading" style="display:none;">Converting image, please wait...</div>
+        <div id="convertError" class="convert-error" style="display:none;"></div>
     </div>
 
     <div class="tips-section">
-        <h3>使用小贴士</h3>
+        <h3>Tips</h3>
         <div class="tips-grid">
             <div class="tip-item">
-                <h4>🔄 多格式支持</h4>
-                <p>支持 JPG、PNG、WEBP 等主流格式</p>
+                <h4>💡 Format Selection</h4>
+                <p>Choose the best format for your needs</p>
             </div>
             <div class="tip-item">
-                <h4>⚡ 极速转换</h4>
-                <p>本地转换，保护隐私，速度超快</p>
+                <h4>🎯 Quality Control</h4>
+                <p>Maintain image quality during conversion</p>
             </div>
             <div class="tip-item">
-                <h4>💾 高清输出</h4>
-                <p>转换后图片可直接下载，画质清晰</p>
+                <h4>⚡ Fast Processing</h4>
+                <p>Get converted images in seconds</p>
             </div>
             <div class="tip-item">
-                <h4>🆓 免费使用</h4>
-                <p>所有功能永久免费，无需注册</p>
+                <h4>⬇️ Easy Download</h4>
+                <p>Save converted images with one click</p>
             </div>
         </div>
     </div>

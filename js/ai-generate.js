@@ -56,4 +56,79 @@ downloadAI.addEventListener('click', function () {
         link.click();
         document.body.removeChild(link);
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const generateForm = document.getElementById('generateForm');
+    const promptInput = document.getElementById('prompt');
+    const preview = document.getElementById('preview');
+    const loading = document.getElementById('loading');
+    const error = document.getElementById('error');
+    const downloadBtn = document.getElementById('downloadImage');
+
+    generateForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // 显示加载状态
+        loading.style.display = 'block';
+        error.style.display = 'none';
+        preview.style.display = 'none';
+        
+        const prompt = promptInput.value.trim();
+        
+        if (!prompt) {
+            error.textContent = 'Please enter a description';
+            error.style.display = 'block';
+            loading.style.display = 'none';
+            return;
+        }
+
+        try {
+            const response = await fetch('https://ai-text-to-image-generator-flux-free-api.p.rapidapi.com/aaaaaaaaaaaaaaaaaiimagegenerator/quick.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-rapidapi-host': 'ai-text-to-image-generator-flux-free-api.p.rapidapi.com',
+                    'x-rapidapi-key': 'fdd740979dmshca77e72afa83addp1cc120jsn8286043d96f5'
+                },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    style_id: 2,
+                    size: "1-1"
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate image');
+            }
+
+            const data = await response.json();
+            
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            // 显示生成的图片
+            const imageUrl = data.image_url;
+            const img = document.getElementById('generatedImage');
+            img.src = imageUrl;
+            
+            // 设置下载按钮
+            downloadBtn.onclick = function() {
+                const link = document.createElement('a');
+                link.href = imageUrl;
+                link.download = 'generated-image.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+
+            preview.style.display = 'block';
+        } catch (err) {
+            error.textContent = err.message || 'Failed to generate image. Please try again.';
+            error.style.display = 'block';
+        } finally {
+            loading.style.display = 'none';
+        }
+    });
 }); 

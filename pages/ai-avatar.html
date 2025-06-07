@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI文字生成动漫头像</title>
+    <title>AI Avatar Generator</title>
+    <meta name="description" content="Generate your own anime-style avatar with AI">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -27,63 +28,63 @@
     </nav>
     <div class="container">
         <header class="header">
-            <h1>AI文字生成动漫头像</h1>
-            <p class="subtitle">输入描述，生成专属二次元头像</p>
+            <h1>AI Avatar Generator</h1>
+            <p class="subtitle">Describe your avatar, generate your own anime-style portrait</p>
             <div class="features">
                 <div class="feature-item">
                     <span class="feature-icon">🧑‍🎤</span>
-                    <span class="feature-text">AI智能生成，专属动漫风格</span>
+                    <span class="feature-text">AI-powered, unique anime style</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">🎨</span>
-                    <span class="feature-text">多种风格，高清输出</span>
+                    <span class="feature-text">Multiple styles, HD output</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">⚡</span>
-                    <span class="feature-text">快速生成，实时预览</span>
+                    <span class="feature-text">Fast generation, real-time preview</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">⬇️</span>
-                    <span class="feature-text">一键下载，方便保存</span>
+                    <span class="feature-text">One-click download</span>
                 </div>
             </div>
         </header>
         <div class="ai-generate-area">
             <div class="ai-form-wrapper">
                 <form id="avatarForm" class="ai-form" autocomplete="off">
-                    <label for="avatarPrompt" class="ai-label">请输入你想要的动漫头像描述：</label>
-                    <input type="text" id="avatarPrompt" class="ai-input" placeholder="例如：蓝发少女，微笑，猫耳" required>
-                    <button type="submit" class="ai-generate-btn">生成头像</button>
+                    <label for="avatarPrompt" class="ai-label">Enter a description for your avatar:</label>
+                    <input type="text" id="avatarPrompt" class="ai-input" placeholder="e.g. blue-haired girl, smiling, cat ears" required>
+                    <button type="submit" class="ai-generate-btn">Generate Avatar</button>
                 </form>
             </div>
             <div class="ai-preview" id="avatarPreview" style="display:none;">
-                <h3>生成结果</h3>
+                <h3>Result</h3>
                 <div class="ai-image-container">
-                    <img id="avatarImage" alt="AI生成的动漫头像">
+                    <img id="avatarImage" alt="AI generated avatar">
                 </div>
-                <button id="downloadAvatar" class="download-btn">下载头像</button>
+                <button id="downloadAvatar" class="download-btn">Download Avatar</button>
             </div>
-            <div id="avatarLoading" class="ai-loading" style="display:none;">头像生成中，请稍候...</div>
+            <div id="avatarLoading" class="ai-loading" style="display:none;">Generating avatar, please wait...</div>
             <div id="avatarError" class="ai-error" style="display:none;"></div>
         </div>
         <div class="tips-section">
-            <h3>使用小贴士</h3>
+            <h3>Tips</h3>
             <div class="tips-grid">
                 <div class="tip-item">
-                    <h4>💡 灵感无限</h4>
-                    <p>输入任意描述，AI帮你实现创意</p>
+                    <h4>💡 Unlimited Inspiration</h4>
+                    <p>Describe any style, AI brings your idea to life</p>
                 </div>
                 <div class="tip-item">
-                    <h4>🎨 多种风格</h4>
-                    <p>支持多种动漫风格和主题</p>
+                    <h4>🎨 Multiple Styles</h4>
+                    <p>Supports various anime styles and themes</p>
                 </div>
                 <div class="tip-item">
-                    <h4>⚡ 极速生成</h4>
-                    <p>几秒钟即可获得高清头像</p>
+                    <h4>⚡ Fast Generation</h4>
+                    <p>Get your HD avatar in seconds</p>
                 </div>
                 <div class="tip-item">
-                    <h4>⬇️ 一键下载</h4>
-                    <p>生成头像可直接保存到本地</p>
+                    <h4>⬇️ One-click Download</h4>
+                    <p>Save your avatar directly</p>
                 </div>
             </div>
         </div>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大疆水印</title>
+    <title>DJI Watermark</title>
+    <meta name="description" content="Add DJI-style watermark to your photos">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-    /* 大疆水印主色调深蓝色 */
+    /* DJI watermark main color deep blue */
     .dji-watermark-area {
         border: 2.5px dashed #2233AA;
         box-shadow: 0 6px 24px rgba(34,51,170,0.10);
@@ -68,7 +69,6 @@
     </style>
 </head>
 <body>
-    <!-- 苹果风格导航栏 -->
     <nav class="apple-navbar">
         <div class="apple-navbar-container">
             <a href="../index.html" class="apple-navbar-logo">Image Toolbox</a>
@@ -91,18 +91,16 @@
             <h1>DJI Watermark</h1>
             <p class="subtitle">Upload a photo and add DJI/camera-style watermark</p>
         </header>
-        <!-- 上传区 -->
         <div class="dji-upload-area dji-watermark-area" id="djiUploadArea">
             <div class="upload-content">
                 <div id="uploadBtn" class="dji-upload-btn" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;">
                     <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#2233AA"/><path d="M24 14v20M24 14l-7 7M24 14l7 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span style="font-size:1.1rem;color:#2233AA;">点击上传照片</span>
-                    <span style="font-size:0.95rem;color:#86868b;">支持JPG、PNG等格式，或拖拽到此处</span>
+                    <span style="font-size:1.1rem;color:#2233AA;">Click to upload photo</span>
+                    <span style="font-size:0.95rem;color:#86868b;">Supports JPG, PNG formats, or drag and drop here</span>
                 </div>
                 <input type="file" id="djiInput" accept="image/*" class="file-input" style="display:none;">
-                <img id="djiPreviewImg" class="preview-img" style="display:none;" alt="图片预览">
+                <img id="djiPreviewImg" class="preview-img" style="display:none;" alt="Image preview">
             </div>
-            <!-- 水印内容表单 -->
             <form class="watermark-form" id="watermarkForm">
                 <label for="modelSelect">Model:</label>
                 <div style="display:flex;gap:0.5rem;align-items:center;">
@@ -130,18 +128,16 @@
                     <button type="button" id="locateBtn" class="dji-watermark-btn" style="padding:0.7rem 1.2rem;font-size:1.1rem;min-width:48px;min-height:48px;display:flex;align-items:center;justify-content:center;">📍</button>
                 </div>
             </form>
-            <button class="dji-watermark-btn" id="addWatermarkBtn">添加水印</button>
+            <button class="dji-watermark-btn" id="addWatermarkBtn">Add Watermark</button>
         </div>
-        <!-- 结果区 -->
         <div class="ai-generate-area" id="djiResultArea" style="display:none;">
-            <h3>添加水印结果</h3>
+            <h3>Watermark Result</h3>
             <div class="ai-image-container">
-                <img id="djiResultImg" alt="带水印图片">
+                <img id="djiResultImg" alt="Image with watermark">
             </div>
-            <button class="download-btn" id="djiDownloadBtn">下载图片</button>
+            <button class="download-btn" id="djiDownloadBtn">Download Image</button>
         </div>
     </div>
-    <!-- 详细中文注释和JS逻辑可后续补充 -->
     <script src="../js/dji-watermark.js"></script>
 </body>
 </html> 

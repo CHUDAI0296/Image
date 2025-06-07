@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片生成漫画</title>
+    <title>Image to Comic</title>
+    <meta name="description" content="Convert your photos into comic style">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-    /* 上传区域居中优化 */
+    /* Upload area center optimization */
     .comic-upload-area {
         margin-left: auto;
         margin-right: auto;
@@ -16,7 +17,6 @@
     </style>
 </head>
 <body>
-    <!-- 苹果风格导航栏 -->
     <nav class="apple-navbar">
         <div class="apple-navbar-container">
             <a href="../index.html" class="apple-navbar-logo">Image Toolbox</a>
@@ -39,7 +39,6 @@
             <h1>Image to Comic</h1>
             <p class="subtitle">Upload an image and generate a comic-style result with one click</p>
         </header>
-        <!-- 功能介绍卡片区 -->
         <div class="features" style="margin-bottom: 2.5rem;">
             <div class="feature-item"><span class="feature-icon">🎨</span><span class="feature-text">One-click comic style conversion, unleash your imagination</span></div>
             <div class="feature-item"><span class="feature-icon">🖼️</span><span class="feature-text">Supports PNG, JPG, WEBP and more, HD output</span></div>
@@ -47,38 +46,35 @@
             <div class="feature-item"><span class="feature-icon">🔒</span><span class="feature-text">Local processing, privacy and security</span></div>
             <div class="feature-item"><span class="feature-icon">💡</span><span class="feature-text">Turn your photos into comics, creative and fun</span></div>
         </div>
-        <!-- 上传区域：图片转漫画（橙色） -->
         <div class="upload-area comic-upload-area" id="comicUploadArea">
             <div class="upload-content">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='none' stroke='%23FF9500' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E" alt="上传图标" class="upload-icon">
-                <p>点击或拖拽图片到这里</p>
-                <p class="upload-hint">支持 PNG、JPG、WEBP 等格式</p>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='none' stroke='%23FF9500' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E" alt="Upload icon" class="upload-icon">
+                <p>Click or drag image here</p>
+                <p class="upload-hint">Supports PNG, JPG, WEBP formats</p>
                 <input type="file" id="comicInput" accept="image/*" class="file-input">
             </div>
         </div>
-        <!-- 使用小贴士 -->
         <div class="tips-section">
-            <h3>使用小贴士</h3>
+            <h3>Usage Tips</h3>
             <div class="tips-grid">
-                <div class="tip-item"><h4>🖱️ 拖拽上传</h4><p>支持直接拖拽图片到上传框，操作更便捷</p></div>
-                <div class="tip-item"><h4>📱 移动端适配</h4><p>手机、平板也能轻松使用，随时随地变漫画</p></div>
-                <div class="tip-item"><h4>🔍 高清预览</h4><p>生成后可实时预览漫画效果，满意再下载</p></div>
-                <div class="tip-item"><h4>💾 一键保存</h4><p>漫画图片一键下载，方便分享和收藏</p></div>
+                <div class="tip-item"><h4>🖱️ Drag & Drop</h4><p>Support drag and drop for easier operation</p></div>
+                <div class="tip-item"><h4>📱 Mobile Friendly</h4><p>Works on mobile and tablet, use anywhere</p></div>
+                <div class="tip-item"><h4>🔍 HD Preview</h4><p>Preview comic effect in real-time</p></div>
+                <div class="tip-item"><h4>💾 One-click Save</h4><p>Download comic image with one click</p></div>
             </div>
         </div>
         <div class="ai-generate-area">
             <div class="ai-preview" id="comicPreview" style="display:none;">
-                <h3>生成结果</h3>
+                <h3>Result</h3>
                 <div class="ai-image-container">
-                    <img id="comicImage" alt="漫画风格图片">
+                    <img id="comicImage" alt="Comic style image">
                 </div>
-                <button id="downloadComic" class="download-btn">下载图片</button>
+                <button id="downloadComic" class="download-btn">Download Image</button>
             </div>
-            <div id="comicLoading" class="ai-loading" style="display:none;">图片生成中，请稍候...</div>
+            <div id="comicLoading" class="ai-loading" style="display:none;">Generating comic, please wait...</div>
             <div id="comicError" class="ai-error" style="display:none;"></div>
         </div>
     </div>
-    <!-- 你可以用 DeepAI CartoonGAN API 或其它API，js/img2comic.js -->
     <script src="../js/img2comic.js"></script>
 </body>
 </html> 

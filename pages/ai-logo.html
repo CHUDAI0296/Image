@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI文字生成Logo</title>
+    <title>AI Logo Generator</title>
+    <meta name="description" content="Generate professional logos with AI">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -27,43 +28,54 @@
     </nav>
     <div class="container">
         <header class="header">
-            <h1>AI文字生成Logo</h1>
-            <p class="subtitle">输入品牌/描述，AI帮你设计Logo</p>
+            <h1>AI Logo Generator</h1>
+            <p class="subtitle">Enter your brand/description, let AI design your logo</p>
+            <div class="features">
+                <div class="feature-item"><span class="feature-icon">🎨</span><span class="feature-text">Professional design</span></div>
+                <div class="feature-item"><span class="feature-icon">⚡</span><span class="feature-text">Fast generation</span></div>
+                <div class="feature-item"><span class="feature-icon">⬇️</span><span class="feature-text">One-click download</span></div>
+            </div>
         </header>
         <div class="ai-generate-area">
             <div class="ai-form-wrapper">
                 <form id="logoForm" class="ai-form" autocomplete="off">
-                    <label for="logoPrompt" class="ai-label">请输入品牌名或logo描述：</label>
-                    <input type="text" id="logoPrompt" class="ai-input" placeholder="例如：绿色环保科技公司logo" required>
-                    <button type="submit" class="ai-generate-btn">生成Logo</button>
+                    <label for="logoPrompt" class="ai-label">Enter your brand description:</label>
+                    <input type="text" id="logoPrompt" class="ai-input" placeholder="e.g. tech company, minimalist style" required>
+                    <button type="submit" class="ai-generate-btn">Generate Logo</button>
                 </form>
             </div>
             <div class="ai-preview" id="logoPreview" style="display:none;">
-                <h3>生成结果</h3>
+                <h3>Result</h3>
                 <div class="ai-image-container">
-                    <img id="logoImage" alt="AI生成的Logo">
+                    <img id="logoImage" alt="AI generated logo">
                 </div>
-                <button id="downloadLogo" class="download-btn">下载Logo</button>
+                <button id="downloadLogo" class="download-btn">Download Logo</button>
             </div>
-            <div id="logoLoading" class="ai-loading" style="display:none;">Logo生成中，请稍候...</div>
+            <div id="logoLoading" class="ai-loading" style="display:none;">
+                Generating logo, please wait...
+            </div>
             <div id="logoError" class="ai-error" style="display:none;"></div>
         </div>
         <!-- 功能介绍卡片区 -->
-        <div class="features" style="margin-bottom: 2.5rem;">
-            <div class="feature-item"><span class="feature-icon">🤖</span><span class="feature-text">AI智能生成，专属品牌Logo一键拥有</span></div>
-            <div class="feature-item"><span class="feature-icon">🎨</span><span class="feature-text">多种风格、多配色，满足不同需求</span></div>
-            <div class="feature-item"><span class="feature-icon">⚡</span><span class="feature-text">极速生成，实时预览，满意再下载</span></div>
-            <div class="feature-item"><span class="feature-icon">🔒</span><span class="feature-text">本地生成，数据安全，隐私无忧</span></div>
-            <div class="feature-item"><span class="feature-icon">💡</span><span class="feature-text">让品牌更有记忆点，提升专业形象</span></div>
-        </div>
-        <!-- 使用小贴士 -->
         <div class="tips-section">
-            <h3>使用小贴士</h3>
+            <h3>Tips</h3>
             <div class="tips-grid">
-                <div class="tip-item"><h4>📝 精准描述</h4><p>输入品牌名或风格描述，AI更懂你</p></div>
-                <div class="tip-item"><h4>🎨 风格多选</h4><p>尝试不同描述，生成多种风格Logo</p></div>
-                <div class="tip-item"><h4>⚡ 极速体验</h4><p>几秒钟即可获得专属Logo，效率超高</p></div>
-                <div class="tip-item"><h4>💾 一键保存</h4><p>Logo高清下载，方便品牌传播</p></div>
+                <div class="tip-item">
+                    <h4>💡 Be Specific</h4>
+                    <p>Describe your brand style and theme</p>
+                </div>
+                <div class="tip-item">
+                    <h4>🎨 Style Options</h4>
+                    <p>Choose from various design styles</p>
+                </div>
+                <div class="tip-item">
+                    <h4>⚡ Fast Results</h4>
+                    <p>Get your logo in seconds</p>
+                </div>
+                <div class="tip-item">
+                    <h4>⬇️ Easy Download</h4>
+                    <p>Save your logo with one click</p>
+                </div>
             </div>
         </div>
     </div>
