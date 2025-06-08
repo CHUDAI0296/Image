@@ -45,19 +45,12 @@
                 </form>
             </div>
 
-            <div id="preview" class="ai-preview" style="display:none;">
-                <h3>Generated Image</h3>
-                <div class="ai-image-container">
-                    <img id="generatedImage" alt="AI generated image">
-                </div>
-                <button id="downloadImage" class="download-btn">Download Image</button>
+            <div id="aiPreview" style="display:none; margin-top: 20px;">
+                <img id="aiImage" src="" alt="AI生成图片" style="max-width: 100%; border-radius: 8px;" />
+                <button id="downloadAI" class="download-btn" style="margin-top: 10px;">下载图片</button>
             </div>
-
-            <div id="loading" class="ai-loading" style="display:none;">
-                Generating image, please wait...
-            </div>
-
-            <div id="error" class="ai-error" style="display:none;"></div>
+            <div id="aiLoading" style="display:none; color: #888; margin-top: 10px;">图片生成中，请稍候...</div>
+            <div id="aiError" style="display:none; color: red; margin-top: 10px;"></div>
         </div>
 
         <div class="tips-section">

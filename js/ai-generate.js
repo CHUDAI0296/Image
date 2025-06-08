@@ -8,8 +8,8 @@ aiPreview.style.display = 'none';
 const aiLoading = document.getElementById('aiLoading');
 const aiError = document.getElementById('aiError');
 
-// DeepAI API Key（免费体验，无需注册）
-const DEEPAI_API_KEY = 'c4b1afe8-4411-4346-8351-4d2173750585';
+// Cloudflare Worker 代理API地址，保护API密钥安全
+const API_URL = 'https://wild-night-aa18.1504478674.workers.dev';
 
 // 生成图片
 aiForm.addEventListener('submit', async function (e) {
@@ -23,21 +23,21 @@ aiForm.addEventListener('submit', async function (e) {
     aiLoading.textContent = '图片生成中，请稍候...';
 
     try {
-        const response = await fetch('https://api.deepai.org/api/text2img', {
+        const response = await fetch(API_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'api-key': DEEPAI_API_KEY
-            },
-            body: `text=${encodeURIComponent(prompt)}`
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                prompt: prompt,
+                // 可根据worker.js支持的参数添加更多，如model、negative_prompt等
+            })
         });
         const data = await response.json();
-        if (data.output_url) {
-            aiImage.src = data.output_url;
+        if (data.output) {
+            aiImage.src = data.output;
             aiPreview.style.display = 'block';
             aiLoading.style.display = 'none';
         } else {
-            throw new Error(data.err || '图片生成失败，请稍后再试');
+            throw new Error(data.error || '图片生成失败，请稍后再试');
         }
     } catch (err) {
         aiLoading.style.display = 'none';
@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // API configuration
     // 修改为你的 Cloudflare Worker 代理 API 地址，保护API密钥安全
-    const API_URL = 'https://wild-night-aa18.1504478674.workers.dev'; // ← 这里填写你的 Worker 地址
     const REPLICATE_MODEL = 'stability-ai/sdxl:39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b';
 
     // Handle form submission

@@ -7,6 +7,9 @@
 // 你需要在 https://deepai.org/ 注册获取API Key，并替换下面的 YOUR_DEEPAI_API_KEY
 const DEEPAI_API_KEY = 'c4b1afe8-4411-4346-8351-4d2173750585'; // TODO: 替换为你的 DeepAI API Key
 
+// Cloudflare Worker 代理API地址，保护API密钥安全
+const API_URL = 'https://wild-night-aa18.1504478674.workers.dev';
+
 // 获取上传区域和结果显示区域
 const uploadArea = document.getElementById('comicUploadArea');
 const fileInput = uploadArea.querySelector('input[type="file"]');
@@ -48,9 +51,9 @@ async function handleFile() {
     loadingTip.style.display = 'block';
     errorTip.style.display = 'none';
     previewBox.style.display = 'none';
-    // 调用 DeepAI API
+    // 调用 Cloudflare Worker 代理API
     try {
-        const resultUrl = await generateComicStyleWithDeepAI(file);
+        const resultUrl = await generateComicStyleWithWorker(file);
         loadingTip.style.display = 'none';
         previewImg.src = resultUrl;
         previewBox.style.display = 'block';
@@ -62,25 +65,38 @@ async function handleFile() {
     }
 }
 
-// 调用 DeepAI CartoonGAN API 生成漫画风格图片
-async function generateComicStyleWithDeepAI(file) {
+// 通过 Cloudflare Worker 代理API 生成漫画风格图片
+async function generateComicStyleWithWorker(file) {
     const formData = new FormData();
     formData.append('image', file);
-    // DeepAI API 文档：https://deepai.org/machine-learning-model/cartoon-gan
-    const response = await fetch('https://api.deepai.org/api/cartoon-gan', {
+    // 将图片转为 base64 字符串
+    const base64 = await fileToBase64(file);
+    // 通过 Worker 代理API
+    const response = await fetch(API_URL, {
         method: 'POST',
-        headers: {
-            'api-key': DEEPAI_API_KEY
-        },
-        body: formData
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            type: 'cartoon-gan', // 标记漫画风格
+            image_base64: base64
+        })
     });
     const data = await response.json();
-    if (response.ok && data.output_url) {
-        return data.output_url;
+    if (response.ok && data.output) {
+        return data.output;
     } else {
-        console.error('DeepAI API 错误详情:', data);
-        throw new Error(data.err || '生成失败');
+        console.error('Worker API 错误详情:', data);
+        throw new Error(data.error || '生成失败');
     }
+}
+
+// 工具函数：文件转base64
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
 }
 
 // 下载图片
