@@ -3,93 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Avatar Generator</title>
-    <meta name="description" content="Generate your own anime-style avatar with AI">
+    <!-- SEO Optimized Title & Description for this page -->
+    <title>Free AI Avatar Maker | Create Your Custom Avatar from Text - Image Toolbox</title>
+    <meta name="description" content="Design a unique anime-style avatar for free. Just describe your ideal character and our AI Avatar Maker will generate a custom portrait for your social media, gaming profile, and more.">
+    <meta name="keywords" content="AI avatar maker, avatar creator, create avatar from text, free avatar generator, custom avatar, anime avatar">
+
+    <!-- Social sharing meta tags -->
+    <meta property="og:title" content="Free AI Avatar Maker | Create Custom Avatars - Image Toolbox">
+    <meta property="og:description" content="Design a unique anime-style avatar from a text description for free.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xiaobawang.my/pages/ai-avatar.html">
+    <meta property="og:image" content="https://xiaobawang.my/og-image-ai-avatar.png"> <!-- A specific image for this page -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Corrected CSS Paths -->
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 苹果风格导航栏 -->
+    <!-- Unified Navigation Bar -->
     <nav class="apple-navbar">
         <div class="apple-navbar-container">
-            <a href="../index.html" class="apple-navbar-logo">Image Toolbox</a>
+            <a href="../index.html" class="apple-navbar-logo" style="display:flex;align-items:center;gap:8px;">
+                <img src="../logo.png" alt="Image Toolbox Logo" style="height:32px;vertical-align:middle;">
+                <span style="font-size:1.5rem;font-weight:bold;letter-spacing:1px;">Image Toolbox</span>
+            </a>
             <div class="apple-navbar-links">
                 <a href="../index.html" class="apple-navbar-link">Home</a>
-                <a href="ai-generate.html" class="apple-navbar-link">AI Image Gen</a>
+                <a href="ai-generate.html" class="apple-navbar-link">AI Art</a>
                 <a href="ai-avatar.html" class="apple-navbar-link active">AI Avatar</a>
-                <a href="img2comic.html" class="apple-navbar-link">Image to Comic</a>
-                <a href="video2livephoto.html" class="apple-navbar-link">Video to Live Photo</a>
-                <a href="dji-watermark.html" class="apple-navbar-link">DJI Watermark</a>
-                <a href="remove-watermark.html" class="apple-navbar-link">Watermark Remover</a>
                 <a href="ai-logo.html" class="apple-navbar-link">AI Logo</a>
                 <a href="compress.html" class="apple-navbar-link">Compress</a>
                 <a href="convert.html" class="apple-navbar-link">Convert</a>
             </div>
         </div>
     </nav>
+
+    <!-- Page specific content -->
     <div class="container">
         <header class="header">
-            <h1>AI Avatar Generator</h1>
-            <p class="subtitle">Describe your avatar, generate your own anime-style portrait</p>
-            <div class="features">
-                <div class="feature-item">
-                    <span class="feature-icon">🧑‍🎤</span>
-                    <span class="feature-text">AI-powered, unique anime style</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">🎨</span>
-                    <span class="feature-text">Multiple styles, HD output</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">⚡</span>
-                    <span class="feature-text">Fast generation, real-time preview</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">⬇️</span>
-                    <span class="feature-text">One-click download</span>
-                </div>
-            </div>
+            <h1>AI Avatar Maker</h1>
+            <p class="subtitle">Describe your perfect avatar, and let our AI create a unique anime-style portrait for you.</p>
         </header>
+
         <div class="ai-generate-area">
             <div class="ai-form-wrapper">
-                <form id="avatarForm" class="ai-form" autocomplete="off">
-                    <label for="avatarPrompt" class="ai-label">Enter a description for your avatar:</label>
-                    <input type="text" id="avatarPrompt" class="ai-input" placeholder="e.g. blue-haired girl, smiling, cat ears" required>
+                <form id="generateForm" class="ai-form" autocomplete="off">
+                    <label for="prompt" class="ai-label">Describe your avatar's appearance:</label>
+                    <textarea id="prompt" class="ai-input" rows="3" placeholder="e.g., a cool boy with silver hair and red eyes, wearing a black hoodie"></textarea>
                     <button type="submit" class="ai-generate-btn">Generate Avatar</button>
                 </form>
             </div>
-            <div class="ai-preview" id="avatarPreview" style="display:none;">
-                <h3>Result</h3>
-                <div class="ai-image-container">
-                    <img id="avatarImage" alt="AI generated avatar">
-                </div>
-                <button id="downloadAvatar" class="download-btn">Download Avatar</button>
+            
+            <div class="status-container" style="margin-top: 20px; text-align: center;">
+                 <div id="loading" style="display:none; color: #555;"></div>
+                 <div id="error" style="display:none; color: red;"></div>
             </div>
-            <div id="avatarLoading" class="ai-loading" style="display:none;">Generating avatar, please wait...</div>
-            <div id="avatarError" class="ai-error" style="display:none;"></div>
+
+            <div id="result-container" style="display:none; margin-top: 20px; text-align: center;">
+                <img id="resultImage" src="" alt="Generated AI Avatar" style="max-width: 100%; border-radius: 8px;" />
+                <a id="downloadBtn" href="#" download="generated_avatar.png" class="download-btn" style="margin-top: 10px; display: inline-block;">Download Avatar</a>
+            </div>
         </div>
+
         <div class="tips-section">
-            <h3>Tips</h3>
+            <h3>Quick Tips</h3>
             <div class="tips-grid">
                 <div class="tip-item">
-                    <h4>💡 Unlimited Inspiration</h4>
-                    <p>Describe any style, AI brings your idea to life</p>
+                    <h4>💡 Be Descriptive</h4>
+                    <p>Mention hair color, clothing, expression, and accessories for detailed results.</p>
                 </div>
                 <div class="tip-item">
-                    <h4>🎨 Multiple Styles</h4>
-                    <p>Supports various anime styles and themes</p>
+                    <h4>🎨 Mix and Match</h4>
+                    <p>Combine features like "elf ears", "glowing eyes", or "fantasy armor".</p>
                 </div>
                 <div class="tip-item">
-                    <h4>⚡ Fast Generation</h4>
-                    <p>Get your HD avatar in seconds</p>
+                    <h4>🧑‍🎤 Define the Style</h4>
+                    <p>Add style keywords like "chibi style", "comic book art", or "vaporwave".</p>
                 </div>
                 <div class="tip-item">
-                    <h4>⬇️ One-click Download</h4>
-                    <p>Save your avatar directly</p>
+                    <h4>✨ Aim for Uniqueness</h4>
+                    <p>Don't be afraid to try unconventional ideas to create a truly unique avatar.</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- 你可以用 DeepAI Anime Portrait API 或其它API，js/ai-avatar.js -->
+
+    <!-- Unified Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Image Toolbox - AI-Powered Online Image Tools</p>
+        </div>
+    </footer>
+
     <script src="../js/ai-avatar.js"></script>
 </body>
+</html> 
 </html> 

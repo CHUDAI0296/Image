@@ -2,22 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AI Image Generator</title>
-    <meta name="description" content="Generate images from text descriptions using AI">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Optimized Title & Description for this page -->
+    <title>Free AI Art Generator | Turn Text to Image - Image Toolbox</title>
+    <meta name="description" content="Create stunning, unique art from text prompts with our free AI Art Generator. Type your idea, choose a style, and watch AI bring it to life in seconds. No sign-up needed.">
+    <meta name="keywords" content="AI art generator, text to image, AI image creator, free AI art, create art from text, AI painting">
+
+    <!-- Open Graph, Twitter Card, etc. for social sharing -->
+    <meta property="og:title" content="Free AI Art Generator | Turn Text to Image - Image Toolbox">
+    <meta property="og:description" content="Create stunning art from text with our free AI Art Generator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xiaobawang.my/pages/ai-generate.html">
+    <meta property="og:image" content="https://xiaobawang.my/og-image-ai-art.png"> <!-- A specific image for this page -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Corrected CSS Paths -->
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Unified Navigation Bar from index.html -->
     <nav class="apple-navbar">
         <div class="apple-navbar-container">
-            <a href="../index.html" class="apple-navbar-logo">Image Toolbox</a>
+            <a href="../index.html" class="apple-navbar-logo" style="display:flex;align-items:center;gap:8px;">
+                <img src="../logo.png" alt="Image Toolbox Logo" style="height:32px;vertical-align:middle;">
+                <span style="font-size:1.5rem;font-weight:bold;letter-spacing:1px;">Image Toolbox</span>
+            </a>
             <div class="apple-navbar-links">
                 <a href="../index.html" class="apple-navbar-link">Home</a>
-                <a href="ai-generate.html" class="apple-navbar-link active">AI Image Gen</a>
+                <a href="ai-generate.html" class="apple-navbar-link active">AI Art</a>
                 <a href="ai-avatar.html" class="apple-navbar-link">AI Avatar</a>
-                <a href="img2comic.html" class="apple-navbar-link">Image to Comic</a>
-                <a href="video2livephoto.html" class="apple-navbar-link">Video to Live Photo</a>
-                <a href="dji-watermark.html" class="apple-navbar-link">DJI Watermark</a>
-                <a href="remove-watermark.html" class="apple-navbar-link">Watermark Remover</a>
                 <a href="ai-logo.html" class="apple-navbar-link">AI Logo</a>
                 <a href="compress.html" class="apple-navbar-link">Compress</a>
                 <a href="convert.html" class="apple-navbar-link">Convert</a>
@@ -25,57 +40,73 @@
         </div>
     </nav>
 
+    <!-- Page specific content -->
     <div class="container">
         <header class="header">
-            <h1>AI Image Generator</h1>
-            <p class="subtitle">Describe the image you want, generate with one click</p>
-            <div class="features">
-                <div class="feature-item"><span class="feature-icon">🎨</span><span class="feature-text">AI-powered image generation</span></div>
-                <div class="feature-item"><span class="feature-icon">⚡</span><span class="feature-text">Fast generation</span></div>
-                <div class="feature-item"><span class="feature-icon">⬇️</span><span class="feature-text">One-click download</span></div>
-            </div>
+            <h1>AI Art Generator</h1>
+            <p class="subtitle">Just describe the image you want, and our AI will create it in seconds.</p>
         </header>
 
         <div class="ai-generate-area">
             <div class="ai-form-wrapper">
                 <form id="generateForm" class="ai-form" autocomplete="off">
-                    <label for="prompt" class="ai-label">Enter your image description:</label>
-                    <input type="text" id="prompt" class="ai-input" placeholder="e.g. a beautiful sunset over mountains" required>
+                    <label for="prompt" class="ai-label">Enter your image prompt:</label>
+                    <textarea id="prompt" class="ai-input" rows="3" placeholder="e.g., A cinematic shot of a raccoon in a library, reading a book."></textarea>
                     <button type="submit" class="ai-generate-btn">Generate Image</button>
                 </form>
             </div>
-
-            <div id="aiPreview" style="display:none; margin-top: 20px;">
-                <img id="aiImage" src="" alt="AI生成图片" style="max-width: 100%; border-radius: 8px;" />
-                <button id="downloadAI" class="download-btn" style="margin-top: 10px;">下载图片</button>
+            
+            <div class="status-container" style="margin-top: 20px; text-align: center;">
+                 <div id="loading" style="display:none; color: #555;"></div>
+                 <div id="error" style="display:none; color: red;"></div>
             </div>
-            <div id="aiLoading" style="display:none; color: #888; margin-top: 10px;">图片生成中，请稍候...</div>
-            <div id="aiError" style="display:none; color: red; margin-top: 10px;"></div>
+
+            <div id="result-container" style="display:none; margin-top: 20px; text-align: center;">
+                <img id="resultImage" src="" alt="Generated AI Image" style="max-width: 100%; border-radius: 8px;" />
+                <a id="downloadBtn" href="#" download="generated_image.png" class="download-btn" style="margin-top: 10px; display: inline-block;">Download Image</a>
+            </div>
         </div>
 
         <div class="tips-section">
-            <h3>Tips</h3>
+            <h3>Quick Tips</h3>
             <div class="tips-grid">
                 <div class="tip-item">
                     <h4>💡 Be Specific</h4>
-                    <p>Describe details like colors, style, and mood</p>
+                    <p>Include details like subject, style, colors, and mood for better results.</p>
                 </div>
                 <div class="tip-item">
-                    <h4>🎨 Style Options</h4>
-                    <p>Try different art styles and themes</p>
+                    <h4>🎨 Experiment with Styles</h4>
+                    <p>Try keywords like "photorealistic", "van gogh style", "cyberpunk", or "anime".</p>
                 </div>
                 <div class="tip-item">
-                    <h4>⚡ Fast Results</h4>
-                    <p>Get your image in seconds</p>
+                    <h4>🖼️ Aspect Ratios</h4>
+                    <p>Add `--ar 16:9` for widescreen or `--ar 2:3` for portrait style.</p>
                 </div>
                 <div class="tip-item">
-                    <h4>⬇️ Easy Download</h4>
-                    <p>Save your image with one click</p>
+                    <h4>✨ Quality Boost</h4>
+                    <p>Include terms like "4K", "highly detailed", or "sharp focus" to improve quality.</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Unified Footer from index.html -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Image Toolbox - AI-Powered Online Image Tools</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const promptFromHome = urlParams.get('prompt');
+            if (promptFromHome) {
+                document.getElementById('prompt').value = decodeURIComponent(promptFromHome);
+            }
+        });
+    </script>
     <script src="../js/ai-generate.js"></script>
 </body>
+</html> 
 </html> 

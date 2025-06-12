@@ -898,13 +898,16 @@ body {
 
 .feature-card-large {
     background: white;
-    padding: 2.5rem 2rem;
+    padding: 0;
     border-radius: 20px;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     color: inherit;
     box-shadow: 0 8px 24px rgba(0,0,0,0.05);
     transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .feature-card-large:hover {
@@ -912,15 +915,30 @@ body {
     box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
 }
 
+.feature-card-large .card-image-container {
+    width: 100%;
+    height: 200px;
+}
+
+.feature-card-large .card-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.feature-card-large .card-content {
+    padding: 1.5rem;
+}
+
 .feature-card-large .feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    display: none;
 }
 
 .feature-card-large h3 {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    margin-top: 0;
 }
 
 .feature-card-large p {
@@ -1022,4 +1040,117 @@ body {
 }
 
 /* 移除旧的 .hero 样式，因为它已被 .hero-new 替代 */
-.hero { display: none; } 
+.hero { display: none; }
+
+/* --- New Example Gallery Section --- */
+.example-gallery {
+    padding: 4rem 1rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.prompt-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 3rem 1rem 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .prompt-overlay {
+    transform: translateY(0);
+}
+
+.prompt-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* --- CoreAI功能区 (Redesigned Cards) --- */
+.features-highlight {
+    margin-bottom: 4rem;
+}
+
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.feature-card-large {
+    background: white;
+    padding: 0;
+    border-radius: 20px;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-card-large:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
+}
+
+.feature-card-large .card-image-container {
+    width: 100%;
+    height: 200px;
+}
+
+.feature-card-large .card-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.feature-card-large .card-content {
+    padding: 1.5rem;
+}
+
+.feature-card-large .feature-icon {
+    display: none;
+}
+
+.feature-card-large h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.feature-card-large p {
+    color: #4b5563;
+    line-height: 1.6;
+} 

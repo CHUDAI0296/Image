@@ -3,83 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Logo Generator</title>
-    <meta name="description" content="Generate professional logos with AI">
+    <!-- SEO Optimized Title & Description for this page -->
+    <title>Free AI Logo Maker | Design Your Custom Logo in Seconds - Image Toolbox</title>
+    <meta name="description" content="Generate a professional logo for your business, brand, or project for free. Simply describe your idea, and our AI Logo Maker will create unique designs in seconds.">
+    <meta name="keywords" content="AI logo maker, logo generator, free logo design, custom logo creator, business logo, AI branding">
+
+    <!-- Social sharing meta tags -->
+    <meta property="og:title" content="Free AI Logo Maker | Design Custom Logos Instantly - Image Toolbox">
+    <meta property="og:description" content="Generate a professional logo for your business or brand for free.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xiaobawang.my/pages/ai-logo.html">
+    <meta property="og:image" content="https://xiaobawang.my/og-image-ai-logo.png"> <!-- A specific image for this page -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Corrected CSS Paths -->
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 苹果风格导航栏 -->
+    <!-- Unified Navigation Bar -->
     <nav class="apple-navbar">
         <div class="apple-navbar-container">
-            <a href="../index.html" class="apple-navbar-logo">Image Toolbox</a>
+            <a href="../index.html" class="apple-navbar-logo" style="display:flex;align-items:center;gap:8px;">
+                <img src="../logo.png" alt="Image Toolbox Logo" style="height:32px;vertical-align:middle;">
+                <span style="font-size:1.5rem;font-weight:bold;letter-spacing:1px;">Image Toolbox</span>
+            </a>
             <div class="apple-navbar-links">
                 <a href="../index.html" class="apple-navbar-link">Home</a>
-                <a href="ai-generate.html" class="apple-navbar-link">AI Image Gen</a>
+                <a href="ai-generate.html" class="apple-navbar-link">AI Art</a>
                 <a href="ai-avatar.html" class="apple-navbar-link">AI Avatar</a>
-                <a href="img2comic.html" class="apple-navbar-link">Image to Comic</a>
-                <a href="video2livephoto.html" class="apple-navbar-link">Video to Live Photo</a>
-                <a href="dji-watermark.html" class="apple-navbar-link">DJI Watermark</a>
-                <a href="remove-watermark.html" class="apple-navbar-link">Watermark Remover</a>
                 <a href="ai-logo.html" class="apple-navbar-link active">AI Logo</a>
                 <a href="compress.html" class="apple-navbar-link">Compress</a>
                 <a href="convert.html" class="apple-navbar-link">Convert</a>
             </div>
         </div>
     </nav>
+
+    <!-- Page specific content -->
     <div class="container">
         <header class="header">
-            <h1>AI Logo Generator</h1>
-            <p class="subtitle">Enter your brand/description, let AI design your logo</p>
-            <div class="features">
-                <div class="feature-item"><span class="feature-icon">🎨</span><span class="feature-text">Professional design</span></div>
-                <div class="feature-item"><span class="feature-icon">⚡</span><span class="feature-text">Fast generation</span></div>
-                <div class="feature-item"><span class="feature-icon">⬇️</span><span class="feature-text">One-click download</span></div>
-            </div>
+            <h1>AI Logo Maker</h1>
+            <p class="subtitle">Describe your brand, and our AI will design a unique logo just for you.</p>
         </header>
+
         <div class="ai-generate-area">
             <div class="ai-form-wrapper">
-                <form id="logoForm" class="ai-form" autocomplete="off">
-                    <label for="logoPrompt" class="ai-label">Enter your brand description:</label>
-                    <input type="text" id="logoPrompt" class="ai-input" placeholder="e.g. tech company, minimalist style" required>
+                <form id="generateForm" class="ai-form" autocomplete="off">
+                    <label for="prompt" class="ai-label">Describe your brand or logo idea:</label>
+                    <textarea id="prompt" class="ai-input" rows="3" placeholder="e.g., A minimalist fox logo for a tech startup, blue and orange colors"></textarea>
                     <button type="submit" class="ai-generate-btn">Generate Logo</button>
                 </form>
             </div>
-            <div class="ai-preview" id="logoPreview" style="display:none;">
-                <h3>Result</h3>
-                <div class="ai-image-container">
-                    <img id="logoImage" alt="AI generated logo">
-                </div>
-                <button id="downloadLogo" class="download-btn">Download Logo</button>
+            
+            <div class="status-container" style="margin-top: 20px; text-align: center;">
+                 <div id="loading" style="display:none; color: #555;"></div>
+                 <div id="error" style="display:none; color: red;"></div>
             </div>
-            <div id="logoLoading" class="ai-loading" style="display:none;">
-                Generating logo, please wait...
+
+            <div id="result-container" style="display:none; margin-top: 20px; text-align: center;">
+                <img id="resultImage" src="" alt="Generated AI Logo" style="max-width: 100%; border-radius: 8px;" />
+                <a id="downloadBtn" href="#" download="generated_logo.png" class="download-btn" style="margin-top: 10px; display: inline-block;">Download Logo</a>
             </div>
-            <div id="logoError" class="ai-error" style="display:none;"></div>
         </div>
-        <!-- 功能介绍卡片区 -->
+
         <div class="tips-section">
-            <h3>Tips</h3>
+            <h3>Quick Tips</h3>
             <div class="tips-grid">
                 <div class="tip-item">
                     <h4>💡 Be Specific</h4>
-                    <p>Describe your brand style and theme</p>
+                    <p>Mention your industry, style (e.g., minimalist, modern), and key elements.</p>
                 </div>
                 <div class="tip-item">
-                    <h4>🎨 Style Options</h4>
-                    <p>Choose from various design styles</p>
+                    <h4>🎨 Specify Colors</h4>
+                    <p>Include preferred colors like "blue and silver" or "warm earth tones".</p>
                 </div>
                 <div class="tip-item">
-                    <h4>⚡ Fast Results</h4>
-                    <p>Get your logo in seconds</p>
+                    <h4>✍️ Negative Prompts</h4>
+                    <p>Use `--no text` to avoid text in the logo, or `--no complex` for simpler designs.</p>
                 </div>
                 <div class="tip-item">
-                    <h4>⬇️ Easy Download</h4>
-                    <p>Save your logo with one click</p>
+                    <h4>✨ Vector Style</h4>
+                    <p>Add "vector logo", "flat icon", or "2d logo" for a clean, scalable look.</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- 你可以用 DeepAI Text to Logo API 或其它API，js/ai-logo.js -->
+
+    <!-- Unified Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Image Toolbox - AI-Powered Online Image Tools</p>
+        </div>
+    </footer>
+
     <script src="../js/ai-logo.js"></script>
 </body>
+</html> 
 </html> 

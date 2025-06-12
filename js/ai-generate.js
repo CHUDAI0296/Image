@@ -1,95 +1,103 @@
-// 获取DOM元素
-const aiForm = document.getElementById('aiForm');
+// Get the necessary DOM elements
+const generateForm = document.getElementById('generateForm');
 const promptInput = document.getElementById('prompt');
-const aiPreview = document.getElementById('aiPreview');
-const aiImage = document.getElementById('aiImage');
-const downloadAI = document.getElementById('downloadAI');
-aiPreview.style.display = 'none';
-const aiLoading = document.getElementById('aiLoading');
-const aiError = document.getElementById('aiError');
+const loadingDiv = document.getElementById('loading');
+const errorDiv = document.getElementById('error');
+const resultContainer = document.getElementById('result-container');
+const resultImage = document.getElementById('resultImage');
+const downloadBtn = document.getElementById('downloadBtn');
 
-// Cloudflare Worker 代理API地址，保护API密钥安全
+// Your Cloudflare Worker proxy URL that protects your API key
 const API_URL = 'https://wild-night-aa18.1504478674.workers.dev';
 
-// 生成图片
-aiForm.addEventListener('submit', async function (e) {
+// Handle form submission
+generateForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const prompt = promptInput.value.trim();
     if (!prompt) return;
 
-    aiPreview.style.display = 'none';
-    aiError.style.display = 'none';
-    aiLoading.style.display = 'block';
-    aiLoading.textContent = '任务已提交，正在排队等待处理... (0%)';
+    // Reset UI state
+    resultContainer.style.display = 'none';
+    errorDiv.style.display = 'none';
+    loadingDiv.style.display = 'block';
+    loadingDiv.textContent = 'Task submitted, waiting in queue... (0%)';
 
     try {
-        // 第一步：向我们的Worker提交任务
+        // Step 1: Submit the task to our Worker
         const initialResponse = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                prompt: prompt,
-            })
+            body: JSON.stringify({ prompt: prompt })
         });
 
         if (!initialResponse.ok) {
             const errData = await initialResponse.json();
-            throw new Error(errData.details?.message || errData.error || 'API 请求失败');
+            throw new Error(errData.details?.message || errData.error || 'API request failed');
         }
 
         const task = await initialResponse.json();
 
-        // 从返回结果中获取用于查询状态的URL
+        // Get the URL to poll for the task status
         const statusUrl = task._links?.get;
         if (!statusUrl) {
-            throw new Error('无法获取任务状态查询链接');
+            throw new Error('Could not get task status URL');
         }
 
-        // 第二步：轮询任务状态
+        // Step 2: Poll for the result
         await pollForResult(statusUrl);
 
     } catch (err) {
-        aiError.textContent = err.message;
-        aiError.style.display = 'block';
-        aiLoading.style.display = 'none';
+        errorDiv.textContent = err.message;
+        errorDiv.style.display = 'block';
+        loadingDiv.style.display = 'none';
     }
 });
 
-// 轮询函数，用于反复查询任务状态直到完成
+// Polling function to check the task status until it's complete
 async function pollForResult(statusUrl) {
-    const pollInterval = 3000; // 每3秒查询一次
+    const pollInterval = 3000; // Poll every 3 seconds
 
     const poll = async () => {
-        const response = await fetch(statusUrl);
-        const statusResult = await response.json();
+        try {
+            const response = await fetch(statusUrl);
+            if (!response.ok) {
+                throw new Error(`Polling failed with status: ${response.status}`);
+            }
+            const statusResult = await response.json();
 
-        if (statusResult.status === 'IN_PROGRESS' || statusResult.status === 'IN_QUEUE') {
-            // 如果还在处理中，更新进度条并继续轮询
-            const progress = statusResult.progress ? statusResult.progress.percentage : 0;
-            aiLoading.textContent = `图片生成中... (${progress}%)`;
-            setTimeout(poll, pollInterval);
-        } else if (statusResult.status === 'SUCCEEDED') {
-            // 如果成功，显示图片
-            const imageUrl = statusResult.output.images[0].url;
-            aiImage.src = imageUrl;
-            downloadAI.href = imageUrl;
-            aiPreview.style.display = 'block';
-            aiLoading.style.display = 'none';
-        } else {
-            // 如果失败，显示错误信息
-            throw new Error(`生成失败: ${statusResult.error?.message || '未知错误'}`);
+            if (statusResult.status === 'IN_PROGRESS' || statusResult.status === 'IN_QUEUE') {
+                // Task is still running, update progress and continue polling
+                const progress = statusResult.progress ? statusResult.progress.percentage : 0;
+                loadingDiv.textContent = `Generating image... (${progress}%)`;
+                setTimeout(poll, pollInterval);
+            } else if (statusResult.status === 'SUCCEEDED') {
+                // Task succeeded, display the image
+                const imageUrl = statusResult.output.images[0].url;
+                resultImage.src = imageUrl;
+                downloadBtn.href = imageUrl; // Set download link
+                resultContainer.style.display = 'block';
+                loadingDiv.style.display = 'none';
+            } else {
+                // Task failed, show the error message
+                const errorMessage = statusResult.error?.message || 'An unknown error occurred';
+                throw new Error(`Generation failed: ${errorMessage}`);
+            }
+        } catch (err) {
+            errorDiv.textContent = err.message;
+            errorDiv.style.display = 'block';
+            loadingDiv.style.display = 'none';
         }
     };
 
-    // 开始第一次轮询
+    // Start the first poll
     poll();
 }
 
-// 下载图片
-downloadAI.addEventListener('click', function () {
-    if (aiImage.src) {
+// Download image
+downloadBtn.addEventListener('click', function () {
+    if (resultImage.src) {
         const link = document.createElement('a');
-        link.href = aiImage.src;
+        link.href = resultImage.src;
         link.download = 'ai_image.png';
         document.body.appendChild(link);
         link.click();
