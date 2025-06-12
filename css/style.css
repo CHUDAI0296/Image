@@ -1168,6 +1168,15 @@ body::before {
     display: none !important;
 }
 
+.gallery-item:hover .prompt-overlay {
+    display: none !important;
+}
+
+.prompt-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
 /* --- CoreAI功能区 (Redesigned Cards) --- */
 .features-highlight {
     margin-bottom: 4rem;
