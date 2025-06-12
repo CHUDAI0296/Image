@@ -1,0 +1,67 @@
+        <section class="example-gallery">
+            <h2 class="section-title">Explore What's Possible</h2>
+            <div class="gallery-grid">
+                <!-- Example 1: Futuristic Cityscape -->
+                <div class="gallery-item">
+                    <img src="https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="A vibrant, futuristic cityscape at dusk, with flying vehicles and neon signs.">
+                </div>
+                <!-- Example 2: Fantasy Creature -->
+                <div class="gallery-item">
+                    <img src="https://image.lexica.art/full_jpg/1c8e1a1b-f78f-4429-8777-a89b71aaa0a6" alt="A majestic fantasy creature, a griffin, perched on a mountain peak.">
+                </div>
+                <!-- Example 3: Minimalist Logo -->
+                <div class="gallery-item">
+                    <img src="https://images.pexels.com/photos/175389/pexels-photo-175389.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="A minimalist vector logo of a coffee cup.">
+                </div>
+                <!-- Example 4: Anime Character -->
+                <div class="gallery-item">
+                    <img src="https://image.lexica.art/full_jpg/47f766e4-4c07-4e63-9520-2d85403a451e" alt="An anime character, a girl with pink hair and headphones, in a vibrant Tokyo street.">
+                </div>
+                 <!-- Example 5: Abstract Art -->
+                <div class="gallery-item">
+                    <img src="https://images.pexels.com/photos/1269968/pexels-photo-1269968.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="An abstract painting with swirling, energetic colors.">
+                </div>
+                <!-- Example 6: Old Sailor Portrait -->
+                <div class="gallery-item">
+                    <img src="https://images.pexels.com/photos/2955375/pexels-photo-2955375.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Photorealistic portrait of an old sailor with a white beard.">
+                </div>
+            </div>
+        </section>
+
+        <!-- Core AI Features Section -->
+
+        <a href="pages/ai-avatar.html" class="feature-card-large">
+            <div class="card-image-container">
+                 <img src="https://image.lexica.art/full_jpg/f2864380-62b8-472e-8361-1610441436a5" alt="A cool and unique anime-style avatar.">
+            </div>
+            <div class="card-content">
+                <h3>AI Anime Avatar</h3>
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.prompt-overlay {
+    display: none; /* As requested, hide the prompt text overlay */
+}
+
+/* --- CoreAI功能区 (Redesigned Cards) --- */
+.features-highlight {
+    margin-bottom: 4rem;
+} 
