@@ -1,0 +1,6 @@
+# Allow all major search engine crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location for search engines
+Sitemap: https://xiaobawang.my/sitemap.xml

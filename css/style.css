@@ -812,4 +812,214 @@ body {
         width: 98vw;
         min-width: 120px;
     }
-} 
+}
+
+/* 统一的章节标题样式 */
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    color: #1d1d1f;
+}
+
+/* --- 全新的 Hero 区域 --- */
+.hero-new {
+    text-align: center;
+    padding: 5rem 1rem;
+    background: radial-gradient(circle, #f5f5f7 0%, #e0e3eb 100%);
+    border-radius: 30px;
+    margin-bottom: 4rem;
+}
+
+.hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #4b5563;
+    margin-bottom: 2.5rem;
+}
+
+.hero-cta-form {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#hero-prompt-input {
+    flex-grow: 1;
+    border: none;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+#hero-generate-btn {
+    border: none;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    color: white;
+    padding: 0 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#hero-generate-btn:hover {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+}
+
+/* --- 核心AI功能区 --- */
+.features-highlight {
+    margin-bottom: 4rem;
+}
+
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.feature-card-large {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card-large:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
+}
+
+.feature-card-large .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card-large h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card-large p {
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+/* 其他工具区域的卡片，调整为更简洁 */
+.features .feature-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.features .feature-card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.features .feature-card .feature-icon {
+    font-size: 2.5rem;
+}
+.features .feature-card h2 {
+    font-size: 1.3rem;
+    margin: 1rem 0 0.5rem;
+}
+.features .feature-card p {
+     margin-bottom: 1.5rem;
+     color: #4b5563;
+     flex-grow: 1;
+}
+.features .feature-card .feature-btn {
+    padding: 0.8rem 1.5rem;
+}
+
+
+/* 优势区域样式调整 */
+.advantages {
+    padding: 4rem 1rem;
+    background-color: #ffffff;
+    border-radius: 30px;
+    margin-top: 4rem;
+}
+
+.advantages-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.advantage-item {
+    text-align: center;
+    padding: 1rem;
+}
+.advantage-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* --- 响应式设计 --- */
+@media (max-width: 900px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    .highlight-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    .hero-cta-form {
+        flex-direction: column;
+        border-radius: 15px;
+    }
+    #hero-prompt-input {
+       border-bottom: 1px solid #e5e7eb;
+       border-radius: 15px 15px 0 0;
+    }
+     #hero-generate-btn {
+        border-radius: 0 0 15px 15px;
+        padding: 1rem;
+    }
+    .advantages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* 移除旧的 .hero 样式，因为它已被 .hero-new 替代 */
+.hero { display: none; } 
