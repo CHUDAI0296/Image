@@ -1,22 +1,20 @@
+// Helper for CORS headers
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  'Access-Control-Max-Age': '86400',
+};
+
 export default {
   async fetch(request, env, ctx) {
     // 处理 CORS 预检请求
     if (request.method === 'OPTIONS') {
-      return new Response(null, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-          'Access-Control-Max-Age': '86400',
-        }
-      });
+      return new Response(null, { headers: corsHeaders });
     }
 
     if (request.method !== 'POST') {
-      return new Response('Method not allowed', {
-        status: 405,
-        headers: { 'Access-Control-Allow-Origin': '*' }
-      });
+      return new Response('Method not allowed', { status: 405, headers: corsHeaders });
     }
 
     let data;
@@ -24,8 +22,8 @@ export default {
       data = await request.json();
     } catch (e) {
       return new Response(JSON.stringify({ error: "Invalid JSON body", details: e.message }), {
-        status: 400, // Bad Request
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        status: 400,
+        headers: corsHeaders
       });
     }
 
@@ -37,11 +35,11 @@ export default {
       if (!prompt) {
         return new Response(JSON.stringify({ error: "prompt is required" }), {
           status: 400,
-          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          headers: corsHeaders
         });
       }
 
-      // 你可以根据需要扩展更多参数
+      // 异步请求 fal.ai，并带上 sync_mode=false 获取任务状态URL
       const response = await fetch('https://api.fal.ai/v1/predictions', {
         method: 'POST',
         headers: {
@@ -53,33 +51,23 @@ export default {
           input: {
             prompt,
             negative_prompt
-          }
+          },
+          // 关键：使用异步模式，让 fal.ai 立刻返回一个查询URL
+          sync_mode: false 
         })
       });
 
       const result = await response.json();
 
-      if (!response.ok) {
-        // 如果 fal.ai 返回了错误，将错误信息返回给前端
-        return new Response(JSON.stringify({ error: "fal.ai API error", details: result }), {
-          status: response.status,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          }
-        });
-      }
-
+      // 直接将 fal.ai 的初始响应（包含查询URL）返回给前端
       return new Response(JSON.stringify(result), {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
+        status: response.status,
+        headers: corsHeaders
       });
     } catch (error) {
       return new Response(JSON.stringify({ error: "Internal Worker error", details: error.message }), {
         status: 500,
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        headers: corsHeaders
       });
     }
   }
