@@ -29,21 +29,27 @@ avatarForm.addEventListener('submit', async function(e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                prompt: prompt + ', anime portrait, high quality, clean background',
-                model: REPLICATE_MODEL,
-                negative_prompt: 'blurry, low quality, distorted, deformed',
-                num_inference_steps: 50,
-                guidance_scale: 7.5
+                prompt: prompt,
             })
         });
-        const data = await response.json();
-        if (data.output) {
-            avatarImage.src = data.output;
-            avatarPreview.style.display = 'block';
-            avatarLoading.style.display = 'none';
-        } else {
-            throw new Error(data.error || '头像生成失败，请稍后再试');
+
+        if (!response.ok) {
+            const errData = await response.json();
+            throw new Error(errData.details?.message || errData.error || 'API 请求失败');
         }
+
+        const data = await response.json();
+
+        // 从 fal.ai 的返回结果中提取图片 URL
+        if (data && data.output && data.output.images && data.output.images.length > 0) {
+            const imageUrl = data.output.images[0].url;
+            avatarPreview.src = imageUrl;
+            downloadAvatar.href = imageUrl; // 设置下载链接
+            avatarPreview.style.display = 'block';
+        } else {
+            throw new Error('API 返回的数据格式不正确，没有找到图片 URL');
+        }
+
     } catch (err) {
         avatarLoading.style.display = 'none';
         avatarError.style.display = 'block';

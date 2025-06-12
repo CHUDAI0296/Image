@@ -23,26 +23,41 @@ aiForm.addEventListener('submit', async function (e) {
     aiLoading.textContent = '图片生成中，请稍候...';
 
     try {
+        // 调用我们的 Worker
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 prompt: prompt,
-                // 可根据worker.js支持的参数添加更多，如model、negative_prompt等
+                // 如果有负面提示输入框，也可以传
+                // negative_prompt: negativePromptInput.value.trim() 
             })
         });
-        const data = await response.json();
-        if (data.output) {
-            aiImage.src = data.output;
-            aiPreview.style.display = 'block';
-            aiLoading.style.display = 'none';
-        } else {
-            throw new Error(data.error || '图片生成失败，请稍后再试');
+
+        if (!response.ok) {
+            const errData = await response.json();
+            throw new Error(errData.details?.message || errData.error || 'API 请求失败');
         }
+
+        const data = await response.json();
+
+        // 从 fal.ai 的返回结果中提取图片 URL
+        // fal.ai 的图片在 output.images[0].url
+        if (data && data.output && data.output.images && data.output.images.length > 0) {
+            const imageUrl = data.output.images[0].url;
+            aiImage.src = imageUrl;
+            // 设置下载按钮的链接
+            downloadAI.href = imageUrl;
+            aiPreview.style.display = 'block';
+        } else {
+            throw new Error('API 返回的数据格式不正确，没有找到图片 URL');
+        }
+
     } catch (err) {
-        aiLoading.style.display = 'none';
+        aiError.textContent = err.message;
         aiError.style.display = 'block';
-        aiError.textContent = err.message || '图片生成失败，请检查网络或稍后再试';
+    } finally {
+        aiLoading.style.display = 'none';
     }
 });
 

@@ -29,25 +29,32 @@ logoForm.addEventListener('submit', async function(e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                prompt: prompt + ', logo, vector, clean, minimal, high quality',
-                model: REPLICATE_MODEL,
-                negative_prompt: 'blurry, low quality, distorted, deformed',
-                num_inference_steps: 50,
-                guidance_scale: 7.5
+                prompt: prompt,
             })
         });
-        const data = await response.json();
-        if (data.output) {
-            logoImage.src = data.output;
-            logoPreview.style.display = 'block';
-            logoLoading.style.display = 'none';
-        } else {
-            throw new Error(data.error || 'Logo生成失败，请稍后再试');
+
+        if (!response.ok) {
+            const errData = await response.json();
+            throw new Error(errData.details?.message || errData.error || 'API 请求失败');
         }
+
+        const data = await response.json();
+
+        // 从 fal.ai 的返回结果中提取图片 URL
+        if (data && data.output && data.output.images && data.output.images.length > 0) {
+            const imageUrl = data.output.images[0].url;
+            logoPreview.src = imageUrl;
+            downloadLogo.href = imageUrl; // 设置下载链接
+            logoPreview.style.display = 'block';
+        } else {
+            throw new Error('API 返回的数据格式不正确，没有找到图片 URL');
+        }
+
     } catch (err) {
-        logoLoading.style.display = 'none';
+        logoError.textContent = err.message;
         logoError.style.display = 'block';
-        logoError.textContent = err.message || 'Logo生成失败，请检查网络或稍后再试';
+    } finally {
+        logoLoading.style.display = 'none';
     }
 });
 
