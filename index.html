@@ -51,6 +51,11 @@
             <a href="index.html" class="apple-navbar-logo" style="display:flex;align-items:center;gap:8px;">
                 <img src="logo.png" alt="Image Toolbox Logo" style="height:32px;vertical-align:middle;">
             </a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <div class="apple-navbar-links">
                 <a href="index.html" class="apple-navbar-link active">Home</a>
                 <a href="pages/ai-generate.html" class="apple-navbar-link">AI Art</a>
@@ -205,6 +210,18 @@
         </div>
     </footer>
     <script>
+        // 汉堡菜单控制
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.apple-navbar-links').classList.toggle('active');
+        });
+
+        // 点击链接后关闭菜单
+        document.querySelectorAll('.apple-navbar-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.apple-navbar-links').classList.remove('active');
+            });
+        });
+
         // Hero CTA button script
         document.getElementById('hero-generate-btn').addEventListener('click', function() {
             const prompt = document.getElementById('hero-prompt-input').value;
