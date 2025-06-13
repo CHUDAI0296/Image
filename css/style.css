@@ -1242,203 +1242,75 @@ body::before {
 }
 
 .footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    margin-top: 4rem;
-    color: #a0a0a0;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px 20px;
+    margin-top: 60px;
 }
 
-.footer-content p {
-    font-size: 0.9rem;
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.footer-link {
-    color: #ff9500;
-    text-decoration: none;
-    transition: color 0.3s;
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-bottom: 30px;
 }
 
-.footer-link:hover {
+.footer-section h4 {
     color: #ffffff;
-    text-decoration: underline;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
-/* 移动端适配样式优化 */
+.footer-section a {
+    display: block;
+    color: #b0b0b0;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #ff9500;
+}
+
+.copyright {
+    text-align: center;
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 移动端适配 */
 @media screen and (max-width: 768px) {
-    /* 导航栏优化 */
-    .apple-navbar {
-        height: 48px;
+    .footer {
+        padding: 30px 15px;
     }
 
-    .apple-navbar-container {
-        padding: 0 10px;
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 25px;
     }
 
-    .apple-navbar-logo img {
-        height: 24px;
-    }
-
-    .menu-toggle {
-        width: 20px;
-        height: 16px;
-    }
-
-    .menu-toggle span:nth-child(1) { top: 0; }
-    .menu-toggle span:nth-child(2) { top: 7px; }
-    .menu-toggle span:nth-child(3) { top: 14px; }
-
-    .apple-navbar-links {
-        top: 48px;
-        padding: 10px;
-        gap: 8px;
-    }
-
-    .apple-navbar-link {
-        padding: 10px 0;
-        font-size: 14px;
-    }
-
-    /* 英雄区域优化 */
-    .hero-new {
-        padding: 20px 12px;
-        margin-top: 48px;
-    }
-
-    .hero-title {
-        font-size: 22px;
-        line-height: 1.2;
+    .footer-section h4 {
+        font-size: 1rem;
         margin-bottom: 12px;
     }
 
-    .hero-subtitle {
-        font-size: 14px;
-        margin-bottom: 20px;
-        padding: 0 8px;
+    .footer-section a {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
     }
 
-    .hero-cta-form {
-        gap: 8px;
-        padding: 0 12px;
-    }
-
-    .hero-cta-form input {
-        padding: 10px 12px;
-        font-size: 14px;
-        border-radius: 10px;
-    }
-
-    .hero-cta-form button {
-        padding: 10px;
-        font-size: 14px;
-        border-radius: 10px;
-    }
-
-    /* 画廊优化 */
-    .example-gallery {
-        padding: 20px 12px;
-    }
-
-    .section-title {
-        font-size: 18px;
-        margin-bottom: 15px;
-    }
-
-    .gallery-grid {
-        gap: 12px;
-        padding: 0 4px;
-    }
-
-    .gallery-item {
-        aspect-ratio: 3/2;
-        border-radius: 10px;
-    }
-
-    /* 功能卡片优化 */
-    .features-highlight {
-        padding: 20px 12px;
-    }
-
-    .highlight-grid {
-        gap: 15px;
-        padding: 0 4px;
-    }
-
-    .feature-card-large {
-        border-radius: 10px;
-    }
-
-    .feature-card-large .card-image-container {
-        height: 140px;
-    }
-
-    .feature-card-large .card-content {
-        padding: 12px;
-    }
-
-    .feature-card-large h3 {
-        font-size: 16px;
-        margin-bottom: 6px;
-    }
-
-    .feature-card-large p {
-        font-size: 13px;
-        line-height: 1.4;
-    }
-
-    /* 工具卡片优化 */
-    .features {
-        padding: 20px 12px;
-    }
-
-    .features .feature-card {
-        padding: 15px 12px;
-        border-radius: 10px;
-    }
-
-    .features .feature-card .feature-icon {
-        font-size: 28px;
-    }
-
-    .features .feature-card h2 {
-        font-size: 16px;
-        margin: 10px 0 6px;
-    }
-
-    .features .feature-card p {
-        font-size: 13px;
-        margin-bottom: 12px;
-        line-height: 1.4;
-    }
-
-    .features .feature-card .feature-btn {
-        padding: 8px 16px;
-        font-size: 13px;
-    }
-
-    /* 优势部分优化 */
-    .advantages {
-        padding: 20px 12px;
-        margin-top: 20px;
-        border-radius: 15px;
-    }
-
-    .advantages-grid {
-        gap: 12px;
-    }
-
-    .advantage-item {
-        padding: 12px;
-        border-radius: 10px;
-    }
-
-    .advantage-item h3 {
-        font-size: 15px;
-        margin-bottom: 6px;
-    }
-
-    .advantage-item p {
-        font-size: 13px;
-        line-height: 1.4;
+    .copyright {
+        font-size: 0.85rem;
+        padding-top: 15px;
     }
 }
 
@@ -1495,5 +1367,93 @@ body::before {
 
     .advantage-item p {
         font-size: 12px;
+    }
+}
+
+/* 父亲节特别区域样式 */
+.fathers-day-section {
+    padding: 40px 20px;
+    background: linear-gradient(45deg, rgba(255, 149, 0, 0.1), rgba(255, 149, 0, 0.05));
+    border-radius: 20px;
+    margin: 30px auto;
+    max-width: 1200px;
+}
+
+.fathers-day-intro {
+    text-align: center;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+}
+
+.fathers-day-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.fathers-day-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.fathers-day-card:hover {
+    transform: translateY(-5px);
+}
+
+.fathers-day-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.fathers-day-card h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin: 15px 15px 8px;
+}
+
+.fathers-day-card p {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    margin: 0 15px 15px;
+    line-height: 1.4;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+    .fathers-day-section {
+        padding: 30px 15px;
+        margin: 20px 10px;
+    }
+
+    .fathers-day-intro {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
+    .fathers-day-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .fathers-day-card img {
+        height: 180px;
+    }
+
+    .fathers-day-card h3 {
+        font-size: 1.1rem;
+        margin: 12px 12px 6px;
+    }
+
+    .fathers-day-card p {
+        font-size: 0.85rem;
+        margin: 0 12px 12px;
     }
 } 
